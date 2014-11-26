@@ -1,0 +1,26 @@
+var twitter = require('ntwitter');
+
+var twit = new twitter({
+    consumer_key: 'Twitter',
+    consumer_secret: 'API',
+    access_token_key: 'keys',
+    access_token_secret: 'go here'
+});
+
+twit.stream('user', {track:'nodejs'}, function(stream) {
+    stream.on('data', function (data) {
+        console.log(data);
+    });
+    stream.on('end', function (response) {
+        // Handle a disconnection
+    });
+    stream.on('destroy', function (response) {
+        // Handle a 'silent' disconnection from Twitter, no end/error event fired
+    });
+    // Disconnect stream after five seconds
+    setTimeout(stream.destroy, 5000);
+});
+
+var server = app.listen(process.env.PORT || 3000, function(){
+console.log('Listening in port %d', server.address().port);
+});
